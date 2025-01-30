@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Student Project</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #4CAF50;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            text-decoration: underline;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .gallery-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 30%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-bottom: 2px solid #4CAF50;
+        }
+
+        .caption {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            width: 100%;
+            height: auto;
+            max-width: 90%; /* Ensure the image fits within the screen */
+            max-height: 90vh; /* Limit height to 90% of the viewport */
+        }
+
+        .lightbox:target {
+            display: flex;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        footer p {
+            font-size: 1em;
+            margin: 5px;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .gallery-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .gallery-item {
+                width: 80%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .gallery-item {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Rare Models</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="resources.html">Resource</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content">
+            <h1>Explore Our Gallery</h1>
+            <p>Discover images and videos showcasing the creativity and innovation behind our project.</p>
+
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item">
+                    <a href="#lightbox1">
+                        <img src="2.jpg" alt="Project Team Collaboration">
+                    </a>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item">
+                    <a href="#lightbox2">
+                        <img src="3.jpg" alt="Prototype Design">
+                    </a>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item">
+                    <a href="#lightbox3">
+                        <img src="4.jpg" alt="Final Presentation">
+                    </a>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item">
+                    <a href="#lightbox4">
+                        <img src="5.jpg" alt="Testing Phase">
+                    </a>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item">
+                    <a href="#lightbox5">
+                        <img src="6.jpg" alt="Design Review">
+                    </a>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item">
+                    <a href="#lightbox6">
+                        <img src="7.jpg" alt="Team Collaboration">
+                    </a>
+                </div>
+
+                <!-- Add more items as needed -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox 1 -->
+    <div id="lightbox1" class="lightbox">
+        <button class="close-btn" onclick="window.location.href='#'">×</button>
+        <img src="2.jpg" alt="Project Team Collaboration">
+    </div>
+
+    <!-- Lightbox 2 -->
+    <div id="lightbox2" class="lightbox">
+        <button class="close-btn" onclick="window.location.href='#'">×</button>
+        <img src="3.jpg" alt="Prototype Design">
+    </div>
+
+    <!-- Lightbox 3 -->
+    <div id="lightbox3" class="lightbox">
+        <button class="close-btn" onclick="window.location.href='#'">×</button>
+        <img src="4.jpg" alt="Final Presentation">
+    </div>
+
+    <!-- Lightbox 4 -->
+    <div id="lightbox4" class="lightbox">
+        <button class="close-btn" onclick="window.location.href='#'">×</button>
+        <img src="5.jpg" alt="Testing Phase">
+    </div>
+
+    <!-- Lightbox 5 -->
+    <div id="lightbox5" class="lightbox">
+        <button class="close-btn" onclick="window.location.href='#'">×</button>
+        <img src="6.jpg" alt="Design Review">
+    </div>
+
+    <!-- Lightbox 6 -->
+    <div id="lightbox6" class="lightbox">
+        <button class="close-btn" onclick="window.location.href='#'">×</button>
+        <img src="7.jpg" alt="Team Collaboration">
+    </div>
+
+    <footer>
+        <p>© 2024 Student Project. All Rights Reserved.</p>
+        <p>Follow us on social media for more updates!</p>
+    </footer>
+</body>
+</html>

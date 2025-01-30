@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fdfbfb, #ebedee);
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #4caf50, #81c784);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Section */
+        main {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        section.content {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        section.content h1 {
+            font-size: 2rem;
+            color: #4caf50;
+            margin-bottom: 1rem;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        form label {
+            font-weight: bold;
+            color: #4caf50;
+            font-size: 1.1rem;
+        }
+
+        form input, form textarea, form button {
+            font-size: 1rem;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        form input:focus, form textarea:focus {
+            border-color: #4caf50;
+            outline: none;
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
+        }
+
+        form textarea {
+            resize: none;
+        }
+
+        form button {
+            background: linear-gradient(90deg, #4caf50, #81c784);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        form button:hover {
+            background: linear-gradient(90deg, #388e3c, #66bb6a);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, #4caf50, #81c784);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <?php
+    $messageSent = false;
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $name = htmlspecialchars($_POST['name']);
+        $email = htmlspecialchars($_POST['email']);
+        $message = htmlspecialchars($_POST['message']);
+
+        // Recipient email
+        $to = "ettohbryan04@gmail.com";
+        // Subject
+        $subject = "Contact Form Submission from $name";
+
+        // Message body
+        $body = "You have received a new message from your website contact form:\n\n";
+        $body .= "Name: $name\n";
+        $body .= "Email: $email\n";
+        $body .= "Message:\n$message\n";
+
+        // Headers
+        $headers = "From: $email\r\n";
+        $headers .= "Reply-To: $email\r\n";
+
+        // Send the email
+        if (mail($to, $subject, $body, $headers)) {
+            $messageSent = true;
+        }
+    }
+    ?>
+    <header>
+        <div class="logo">Rare Models</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="resources.html">Resource</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <h1>Contact Us</h1>
+            <?php if ($messageSent): ?>
+                <p style="color: green; font-weight: bold;">Thank you for contacting us! Your message has been sent successfully.</p>
+            <?php else: ?>
+                <form method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="Enter your message" rows="5" required></textarea>
+                    
+                    <button type="submit">Submit</button>
+                </form>
+            <?php endif; ?>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Student Project. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
